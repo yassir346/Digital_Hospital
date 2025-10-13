@@ -9,7 +9,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id_personne")
 public class Docteur extends Personne{
     private String specialite;
-    @OneToMany(mappedBy = "docteur")
+    @OneToMany(mappedBy = "docteur", fetch = FetchType.EAGER)
     private List<Consultation> consultations;
     @ManyToOne
     @JoinColumn(name = "id_departement")
@@ -63,7 +63,7 @@ public class Docteur extends Personne{
     public String toString() {
         return "Docteur{" +
                 "specialite='" + specialite + '\'' +
-                ", consultations=" + consultations +
+                ", consultations=" + (consultations != null ? consultations.size() : 0) +
                 ", departement=" + departement +
                 '}';
     }

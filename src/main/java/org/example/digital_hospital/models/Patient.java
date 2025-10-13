@@ -10,7 +10,7 @@ import java.util.List;
 public class Patient extends Personne{
     private float poids;
     private float taille;
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Consultation> consultations;
 
     public Patient(String nom, String prenom, String email, String motDePasse, float poids, float taille, List<Consultation> consultations) {
@@ -59,7 +59,7 @@ public class Patient extends Personne{
         return "Patient{" +
                 "poids=" + poids +
                 ", taille=" + taille +
-                ", consultations=" + consultations +
+                ", consultations=" + (consultations != null ? consultations.size() : 0) +
                 '}';
     }
 }

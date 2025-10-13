@@ -15,17 +15,18 @@ public class Salle {
     private String nom;
     @Column(nullable = false)
     private int capacite;
-    @Temporal(TemporalType.TIMESTAMP)
-    private List<LocalDateTime> creneaux;
+    @OneToMany(mappedBy = "salle", fetch = FetchType.EAGER)
+    private List<Consultation> consultations;
     @ManyToOne
     @JoinColumn(name = "id_departement")
     private Departement departement;
 
-    public Salle(int id, String nom, int capacite, List<LocalDateTime> creneaux) {
+    public Salle(int id, String nom, int capacite, List<Consultation> consultations, Departement departement) {
         this.id = id;
         this.nom = nom;
         this.capacite = capacite;
-        this.creneaux = creneaux;
+        this.consultations = consultations;
+        this.departement = departement;
     }
 
     public Salle() {
@@ -55,12 +56,12 @@ public class Salle {
         this.capacite = capacite;
     }
 
-    public List<LocalDateTime> getCreneaux() {
-        return creneaux;
+    public List<Consultation> getConsultations() {
+        return consultations;
     }
 
-    public void setCreneaux(List<LocalDateTime> creneaux) {
-        this.creneaux = creneaux;
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations = consultations;
     }
 
     public Departement getDepartement() {
@@ -77,7 +78,7 @@ public class Salle {
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", capacite=" + capacite +
-                ", creneaux=" + creneaux +
+                ", consultations=" + (consultations != null ? consultations.size() : 0) +
                 '}';
     }
 }

@@ -20,10 +20,13 @@ public class Consultation {
     private String compteRendu;
     @ManyToOne
     @JoinColumn(name = "id_patient")
-    Patient patient;
+    private Patient patient;
     @ManyToOne
     @JoinColumn(name = "id_docteur")
-    Docteur docteur;
+    private Docteur docteur;
+    @ManyToOne
+    @JoinColumn(name = "id_salle")
+    private Salle salle;
 
     public Consultation(int id, LocalDateTime heureEtDate, Statut statut, String compteRendu, Patient patient, Docteur docteur) {
         this.id = id;
