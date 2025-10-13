@@ -11,5 +11,6 @@ public interface IDocteurRepository {
     void delete(int id);
     List<Docteur> findAll();
     Docteur findById(int id);
+    Docteur findByEmail(String email);
     List<Docteur> findByDepartement(Departement departement);
 }

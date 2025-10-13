@@ -3,6 +3,7 @@ package org.example.digital_hospital.repository.Impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 import org.example.digital_hospital.models.Departement;
 import org.example.digital_hospital.models.Docteur;
 import org.example.digital_hospital.repository.IDocteurRepository;
@@ -61,7 +62,20 @@ public class DocteurRepositoryImpl implements IDocteurRepository {
     }
 
     @Override
+    public Docteur findByEmail(String email) {
+        EntityManager em = emf.createEntityManager();
+        Docteur docteur = em.find(Docteur.class, email);
+        em.close();
+        return docteur;
+    }
+
+    @Override
     public List<Docteur> findByDepartement(Departement departement) {
-        return List.of();
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("FROM Docteur WHERE departement.id = :id_departement", Docteur.class);
+        query.setParameter("id_departement", departement.getId());
+        List<Docteur> docteurs = query.getResultList();
+        em.close();
+        return docteurs;
     }
 }
