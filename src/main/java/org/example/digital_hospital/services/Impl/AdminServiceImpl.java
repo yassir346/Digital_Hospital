@@ -8,8 +8,6 @@ import org.example.digital_hospital.models.Docteur;
 import org.example.digital_hospital.models.Salle;
 import org.example.digital_hospital.repository.*;
 import org.example.digital_hospital.services.IAdminService;
-import org.example.digital_hospital.services.IConsultationService;
-import org.example.digital_hospital.services.IDepartementService;
 
 import java.util.List;
 

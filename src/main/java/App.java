@@ -66,5 +66,6 @@ public class App {
         salle.setNom("salito");
         salleRepository.save(salle);
 
+
     }
 }
