@@ -1,6 +1,8 @@
 import org.example.digital_hospital.models.*;
 import org.example.digital_hospital.repository.*;
 import org.example.digital_hospital.repository.Impl.*;
+import org.example.digital_hospital.services.IAdminService;
+import org.example.digital_hospital.services.Impl.AdminServiceImpl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -60,12 +62,21 @@ public class App {
             System.out.println(c);
         }
 
-        salle.setCapacite(20);
-        salle.setDepartement(RH);
-        salle.setConsultations(consultations);
-        salle.setNom("salito");
-        salleRepository.save(salle);
 
+//        salle.setCapacite(20);
+//        salle.setDepartement(RH);
+//        salle.setConsultations(consultations);
+//        salle.setNom("salito");
+//        salleRepository.save(salle);
+
+        IAdminService adminService = new AdminServiceImpl(consultationRepository, departementRepository, docteurRepository, patientRepository, salleRepository);
+
+        Salle salle1 = adminService.getSalleById(6);
+        System.out.println(salle1);
+        salle1.setNom("baraka");
+        salle1.setCapacite(4);
+        adminService.updateSalle(salle1);
+        System.out.println(salle1);
 
     }
 }

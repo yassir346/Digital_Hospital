@@ -64,7 +64,10 @@ public class DocteurRepositoryImpl implements IDocteurRepository {
     @Override
     public Docteur findByEmail(String email) {
         EntityManager em = emf.createEntityManager();
-        Docteur docteur = em.find(Docteur.class, email);
+        Docteur docteur;
+        Query query = em.createQuery("FROM Docteur WHERE email = :email", Docteur.class);
+        query.setParameter("email", email);
+        docteur = (Docteur) query.getSingleResult();
         em.close();
         return docteur;
     }

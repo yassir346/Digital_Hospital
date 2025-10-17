@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "patients")
-@PrimaryKeyJoinColumn(name = "id_personnes")
+@PrimaryKeyJoinColumn(name = "id_personne")
 public class Patient extends Personne{
     private float poids;
     private float taille;

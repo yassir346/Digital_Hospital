@@ -6,8 +6,11 @@
 </head>
 <body>
 <h1><%= "Hello World!" %>
+    <a href="salles">Salles</a>
+    <a href="departements">Departements</a>
+    <a href="docteurs">Docteurs</a>
+    <a href="consultations">Consultations</a>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
 </body>
 </html>

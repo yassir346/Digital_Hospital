@@ -1,18 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
   User: Youcode
-  Date: 14/10/2025
-  Time: 14:39
+  Date: 16/10/2025
+  Time: 21:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Création d'un département</title>
+    <title>Creer Consultation</title>
 </head>
 <body>
-    <form>
+    <label for="date">Date et heure:</label>
+    <input type="datetime-local" id="heureEtDate" name = "heureEtDate" value="heureEtDate">
 
-    </form>
 </body>
 </html>

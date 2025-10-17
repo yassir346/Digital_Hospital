@@ -5,16 +5,4 @@
          http://xmlns.jcp.org/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="5.0">
-    <listener>
-        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
-    </listener>
-    <servlet>
-        <servlet-name>HelloWorldServlet</servlet-name>
-        <servlet-class>org.example.digital_hospital.HelloWorldServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>HelloWorldServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
 </web-app>

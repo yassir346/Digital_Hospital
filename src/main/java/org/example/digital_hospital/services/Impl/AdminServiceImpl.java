@@ -169,8 +169,13 @@ public class AdminServiceImpl implements IAdminService {
         if (salle.getCapacite() > 7) {
             throw new ValidationException("La capacité de la salle ne doit pas être supérieure à 7");
         }
-        Salle foundSalle = salleRepository.findById(salle.getId());
-        salleRepository.update(foundSalle);
+       Salle salledb = salleRepository.findById(salle.getId());
+
+        if (salledb == null){
+            throw new ValidationException("Salle not found");
+        }
+
+        salleRepository.update(salle);
     }
 
     @Override
@@ -242,8 +247,8 @@ public class AdminServiceImpl implements IAdminService {
         if(docteur.getRole() == null || docteur.getRole().isEmpty()){
             throw new ValidationException("Le role est nul ou vide.");
         }
-        if(docteurRepository.findByEmail(docteur.getEmail()) != null){
-            throw new ValidationException("L'email existe déja.");
-        }
+//        if(docteurRepository.findByEmail(docteur.getEmail()) != null){
+//            throw new ValidationException("L'email existe déja.");
+//        }
     }
 }
