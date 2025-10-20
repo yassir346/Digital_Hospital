@@ -15,17 +15,14 @@ public class Salle {
     private String nom;
     @Column(nullable = false)
     private int capacite;
-    @OneToMany(mappedBy = "salle", fetch = FetchType.EAGER)
-    private List<Consultation> consultations;
     @ManyToOne
     @JoinColumn(name = "id_departement")
     private Departement departement;
 
-    public Salle(int id, String nom, int capacite, List<Consultation> consultations, Departement departement) {
+    public Salle(int id, String nom, int capacite, Departement departement) {
         this.id = id;
         this.nom = nom;
         this.capacite = capacite;
-        this.consultations = consultations;
         this.departement = departement;
     }
 
@@ -56,14 +53,6 @@ public class Salle {
         this.capacite = capacite;
     }
 
-    public List<Consultation> getConsultations() {
-        return consultations;
-    }
-
-    public void setConsultations(List<Consultation> consultations) {
-        this.consultations = consultations;
-    }
-
     public Departement getDepartement() {
         return departement;
     }
@@ -78,7 +67,6 @@ public class Salle {
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", capacite=" + capacite +
-                ", consultations=" + (consultations != null ? consultations.size() : 0) +
                 '}';
     }
 }

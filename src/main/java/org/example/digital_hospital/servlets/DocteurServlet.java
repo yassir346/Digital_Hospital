@@ -5,7 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.digital_hospital.models.Consultation;
 import org.example.digital_hospital.models.Docteur;
+import org.example.digital_hospital.models.Salle;
 import org.example.digital_hospital.repository.*;
 import org.example.digital_hospital.repository.Impl.*;
 import org.example.digital_hospital.services.IAdminService;
@@ -37,6 +39,10 @@ public class DocteurServlet extends HttpServlet {
                 break;
 
             case "modifier":
+                int id = Integer.parseInt(request.getParameter("id"));
+                docteur = adminService.getDocteurById(id);
+                request.setAttribute("docteur", docteur);
+                request.getRequestDispatcher("/docteur/formDocteur.jsp").forward(request, response);
 
                 break;
 
@@ -62,7 +68,7 @@ public class DocteurServlet extends HttpServlet {
 
         int id = request.getParameter("id") == null || request.getParameter("id").isEmpty() ? 0 : Integer.parseInt(request.getParameter("id"));
 
-            Docteur docteur = new Docteur();
+        Docteur docteur = new Docteur();
 
         if (id == 0){
             String nom = request.getParameter("nom");
@@ -83,7 +89,7 @@ public class DocteurServlet extends HttpServlet {
             }
         }
 
-        response.sendRedirect("doctors");
+        response.sendRedirect("docteurs");
     }
 
 

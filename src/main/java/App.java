@@ -3,6 +3,7 @@ import org.example.digital_hospital.repository.*;
 import org.example.digital_hospital.repository.Impl.*;
 import org.example.digital_hospital.services.IAdminService;
 import org.example.digital_hospital.services.Impl.AdminServiceImpl;
+import org.example.digital_hospital.servlets.ConsultationServlet;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -56,27 +57,19 @@ public class App {
 //        consultation.setDocteur(foundDocteur);
 //        consultation.setStatut(Statut.RESERVEE);
 //        consultationRepository.save(consultation);
-
+//
         List<Consultation> consultations = consultationRepository.findAll();
-        for (Consultation c : consultations){
-            System.out.println(c);
+//        for (Consultation c : consultations){
+//            System.out.println(c);
+//        }
+
+        List<Consultation> consultations1Reservee = consultations.stream().filter(consultation1 -> consultation1.getStatut() == Statut.RESERVEE).toList();
+
+        for (Consultation c : consultations1Reservee){
+            System.out.println(consultations1Reservee);
         }
 
-
-//        salle.setCapacite(20);
-//        salle.setDepartement(RH);
-//        salle.setConsultations(consultations);
-//        salle.setNom("salito");
-//        salleRepository.save(salle);
-
-        IAdminService adminService = new AdminServiceImpl(consultationRepository, departementRepository, docteurRepository, patientRepository, salleRepository);
-
-        Salle salle1 = adminService.getSalleById(6);
-        System.out.println(salle1);
-        salle1.setNom("baraka");
-        salle1.setCapacite(4);
-        adminService.updateSalle(salle1);
-        System.out.println(salle1);
-
+        ConsultationServlet consultationServlet = new ConsultationServlet();
     }
+
 }

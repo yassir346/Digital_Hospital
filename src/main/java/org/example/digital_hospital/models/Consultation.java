@@ -24,9 +24,6 @@ public class Consultation {
     @ManyToOne
     @JoinColumn(name = "id_docteur")
     private Docteur docteur;
-    @ManyToOne
-    @JoinColumn(name = "id_salle")
-    private Salle salle;
 
     public Consultation(int id, LocalDateTime heureEtDate, Statut statut, String compteRendu, Patient patient, Docteur docteur) {
         this.id = id;

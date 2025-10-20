@@ -206,11 +206,11 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public void getConsultation() throws ValidationException{
+    public List<Consultation> getConsultations() throws ValidationException{
         if (consultationRepository.findAll().isEmpty()){
             throw new ValidationException("Accune consultation est trouvée.");
         }
-        consultationRepository.findAll();
+        return consultationRepository.findAll();
     }
 
     @Override

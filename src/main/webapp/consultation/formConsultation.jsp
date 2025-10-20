@@ -11,8 +11,16 @@
     <title>Creer Consultation</title>
 </head>
 <body>
-    <label for="date">Date et heure:</label>
-    <input type="datetime-local" id="heureEtDate" name = "heureEtDate" value="heureEtDate">
-
+    <div class="container">
+        <h2>Réservez une consultation</h2>
+        <form action="consultations" method="post">
+            <label for="date">Date et heure:</label>
+            <input type="datetime-local" id="heureEtDate" name = "heureEtDate" value="consultation.heureEtDate">
+            <button type="submit">Créer ou modifier Consultation</button>
+        </form>
+    </div>
+    <div>
+        <h2>${errorMassege}</h2>
+    </div>
 </body>
 </html>

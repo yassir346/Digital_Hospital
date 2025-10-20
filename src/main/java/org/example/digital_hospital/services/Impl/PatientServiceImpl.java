@@ -10,6 +10,7 @@ import org.example.digital_hospital.repository.ISalleRepository;
 import org.example.digital_hospital.services.IPatientService;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PatientServiceImpl implements IPatientService {
@@ -27,8 +28,11 @@ public class PatientServiceImpl implements IPatientService {
 
     @Override
     public void createConsultation(Consultation consultation) {
-        if (docteurDisponibilite(consultation) == false){
-            throw new ValidationException("Docteur n'est pas disponible.");
+        List<Consultation> consultations = consultationRepository.findAll();
+        List<Consultation> consultationsValidee = consultations.stream().filter(c -> c.getStatut() == Statut.VALIDEE).toList();
+
+        if (consultationDisponibilite(consultation, consultationsValidee) == false){
+            throw new ValidationException("Choisisser une durée différente.");
         }
         consultationRepository.save(consultation);
     }
@@ -38,9 +42,9 @@ public class PatientServiceImpl implements IPatientService {
         if(consultationRepository.findById(consultation.getId()) == null){
             throw new NotFoundException("Consultation n'est pas trouvée.");
         }
-        if (docteurDisponibilite(consultation) == false){
-            throw new ValidationException("Docteur n'est pas disponible.");
-        }
+//        if (docteurDisponibilite(consultation) == false){
+//            throw new ValidationException("Docteur n'est pas disponible.");
+//        }
         consultationRepository.update(consultation);
     }
 
@@ -76,21 +80,25 @@ public class PatientServiceImpl implements IPatientService {
         return docteurRepository.findByDepartement(departement);
     }
 
-    public boolean docteurDisponibilite(Consultation consultation){
-        Docteur foundDocteur = docteurRepository.findById(consultation.getDocteur().getId());
-        if (foundDocteur == null){
-            throw new ValidationException("Docteur n'est pas trouvé.");
-        }
-        return consultationDisponibilite(consultation, foundDocteur.getConsultations());
-    }
+//    public boolean docteurDisponibilite(Consultation consultation){
+//        Docteur foundDocteur = null;
+//        if(consultation.getDocteur() != null){
+//            foundDocteur = docteurRepository.findById(consultation.getDocteur().getId());
+//            if (foundDocteur == null){
+//                throw new ValidationException("Docteur n'est pas trouvé.");
+//            }
+//        }
+//        return consultationDisponibilite(consultation, foundDocteur.getConsultations());
+//
+//    }
 
     public boolean consultationDisponibilite(Consultation consultation, List<Consultation> consultations){
         LocalTime temps = consultation.getHeureEtDate().toLocalTime();
         int minute = temps.getMinute();
         LocalTime debutService = LocalTime.of(8, 30);
-        LocalTime finService = LocalTime.of(4,30);
+        LocalTime finService = LocalTime.of(16,30);
 
-        if(minute != 0 || minute != 30){
+        if(minute != 0 && minute != 30){
             throw new ValidationException("L'heure' de la consultation doit être à heure:00 minutes ou heure:30 minutes");
         }
         if(temps.isBefore(debutService) || temps.isAfter(finService)){

@@ -24,7 +24,7 @@ public interface IAdminService {
     void deleteSalle(Salle salle);
     List<Salle> getSalles();
     Salle getSalleById(int id);
-    void getConsultation();
+    List<Consultation> getConsultations();
     Consultation getConsultationById(int id);
 
 }
